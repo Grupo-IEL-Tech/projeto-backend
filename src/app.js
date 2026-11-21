@@ -1,0 +1,21 @@
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const openapi = require('./docs/openapi');
+const userRoutes = require('./routes/userRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const productRoutes = require('./routes/productRoutes');
+const errors = require('./middleware/errors');
+
+const app = express();
+app.use(cors());
+app.use(express.json({ limit: '10mb' }));
+app.get('/health', (req, res) => res.json({ status: 'ok', message: 'Digital Store API online.' }));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapi));
+app.use('/v1/user', userRoutes);
+app.use('/v1/category', categoryRoutes);
+app.use('/v1/product', productRoutes);
+app.use((req, res) => res.status(404).json({ message: 'Rota não encontrada.' }));
+app.use(errors);
+module.exports = app;
