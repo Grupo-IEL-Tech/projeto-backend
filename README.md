@@ -1,4 +1,4 @@
-Integrantes: Pedro Henrique, Anderson Maia e Anderson Oliveira
+Integrantes: Pedro Henrique e Anderson Oliveira
 
 # 🛒 Digital Store – Back-end
 
